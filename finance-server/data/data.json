@@ -1,0 +1,22 @@
+{
+    "earnings": [
+        {
+            "name": "Elliot",
+            "amount": 32500
+        },
+        {
+            "name": "Rio",
+            "amount": 20000
+        }
+    ],
+    "taxBands": [
+        {
+            "earning": 12500,
+            "percentage": 0
+        },
+        {
+            "earning": 50000,
+            "percentage": 20
+        }
+    ]
+}

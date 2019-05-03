@@ -1,0 +1,14 @@
+{
+  "name": "finance-server",
+  "version": "1.0.0",
+  "description": "server for finance app",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "author": "Elliot Kerman",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
