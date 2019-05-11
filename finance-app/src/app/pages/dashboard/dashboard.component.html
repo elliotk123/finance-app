@@ -1,0 +1,15 @@
+<div *ngFor = 'let budget of budgets'>
+  {{budget.name}}: £{{budget.amount}}
+</div>
+<div>
+  Subtotal after tax and Ni: £{{this.total}}
+</div>
+<div>
+  Total after Expenses: £{{this.totalAfterExpenses}}
+</div>
+<div>
+  Monthly Budget: £{{this.monthlyTotal}}
+</div>
+<div>
+  Weekly Budget: £{{this.weeklyTotal}}
+</div>

@@ -8,8 +8,19 @@ export interface TaxBandModel {
     percentage: number
 }
 
+export interface ExpenseModel {
+    monthly: Expense[],
+    weekly: Expense[]
+}
+
+export interface Expense {
+    name: string,
+    cost: number
+}
+
 export interface DataModel {
     earnings: EarningModel[],
-    taxBands: TaxBandModel[]
+    taxBands: TaxBandModel[],
+    expenses: ExpenseModel
 }
 
