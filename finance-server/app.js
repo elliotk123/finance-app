@@ -12,6 +12,7 @@ AWS.config.update({
   });
 
 var s3 = new AWS.S3();
+const params = {Bucket: 'www.connors-stag.com', Key: 'data.json'}
 
 app.get('/data', (req, res) => {
     res.set({
@@ -24,8 +25,6 @@ app.get('/dataOnline', (req, res) => {
     res.set({
         'Access-Control-Allow-Origin': '*'
     })
-    const params = {Bucket: 'www.connors-stag.com', Key: 'data.json'}
-    //s3://www.connors-stag.com/data.json
     s3.getObject(params, function(err, data) {
         if (err){
             console.log("ERROR!")
