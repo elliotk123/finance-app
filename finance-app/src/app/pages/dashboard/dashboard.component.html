@@ -14,6 +14,6 @@
   Weekly Budget: £{{this.weeklyTotal}}
 </div>
 Monthly Expenses:
-<app-expense-income-list *ngIf = "data?.expenses.monthly" [(itemList)] = "data.expenses.monthly"></app-expense-income-list>
+<app-expense-income-list *ngIf = "data?.expenses.monthly" [(model)] = "data.expenses.monthly"></app-expense-income-list>
 Weekly Expenses:
-<app-expense-income-list *ngIf = "data?.expenses.weekly" [(itemList)] = "data.expenses.weekly"></app-expense-income-list>
+<app-expense-income-list *ngIf = "data?.expenses.weekly" [(model)] = "data.expenses.weekly"></app-expense-income-list>
