@@ -1,4 +1,4 @@
-export interface EarningModel {
+export interface ExpenseIncomeModel {
     name: string,
     amount: number
 }
@@ -9,17 +9,12 @@ export interface TaxBandModel {
 }
 
 export interface ExpenseModel {
-    monthly: Expense[],
-    weekly: Expense[]
-}
-
-export interface Expense {
-    name: string,
-    cost: number
+    monthly: ExpenseIncomeModel[],
+    weekly: ExpenseIncomeModel[]
 }
 
 export interface DataModel {
-    earnings: EarningModel[],
+    earnings: ExpenseIncomeModel[],
     taxBands: TaxBandModel[],
     expenses: ExpenseModel
 }

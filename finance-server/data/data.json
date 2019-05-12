@@ -23,45 +23,45 @@
         "monthly": [
             {
                 "name": "rent",
-                "cost": 600
+                "amount": 600
             },
             {
                 "name": "Netflix",
-                "cost": 8
+                "amount": 8
             },
             {
                 "name": "Now Tv",
-                "cost": 8
+                "amount": 8
             },
             {
                 "name": "Car Insurance",
-                "cost": 100
+                "amount": 100
             },
             {
                 "name": "Internet",
-                "cost": 30
+                "amount": 30
             },
             {
                 "name": "Council Tax",
-                "cost": 120
+                "amount": 120
             },
             {
                 "name": "Contents Insurance",
-                "cost": 30
+                "amount": 30
             },
             {
                 "name": "Savings",
-                "cost": 500
+                "amount": 500
             }
         ],
         "weekly": [
             {
                 "name": "fuel",
-                "cost": 75
+                "amount": 75
             },
             {
                 "name": "Electric and Water",
-                "cost": 15
+                "amount": 20
             }
         ]
     }

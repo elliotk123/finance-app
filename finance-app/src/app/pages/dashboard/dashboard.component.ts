@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/dataService';
-import { DataModel, EarningModel } from '../../interfaces/dataModel';
+import { DataModel, ExpenseIncomeModel } from '../../interfaces/dataModel';
 import { Utils } from '../../utils/utils';
 
 @Component({
@@ -10,7 +10,7 @@ import { Utils } from '../../utils/utils';
 })
 export class DashboardComponent implements OnInit {
 
-  budgets: EarningModel[];
+  budgets: ExpenseIncomeModel[];
   data: DataModel;
   total: number;
   totalAfterExpenses: number;
@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
         amount: earning.amount - taxes[index].amount - NiPayments[index].amount
       }
     })
-    this.total = (this.budgets.reduce((prev: EarningModel, cur: EarningModel) => {
+    this.total = (this.budgets.reduce((prev: ExpenseIncomeModel, cur: ExpenseIncomeModel) => {
       return {
         name: "any",
         amount: prev.amount + cur.amount

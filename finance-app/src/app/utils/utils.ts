@@ -1,8 +1,8 @@
-import { DataModel, EarningModel, Expense } from '../interfaces/dataModel';
+import { DataModel, ExpenseIncomeModel } from '../interfaces/dataModel';
 
 export class Utils {
-    static getTax(data: DataModel): EarningModel[] {
-        const tax: EarningModel[] = data.earnings.map(earning => {
+    static getTax(data: DataModel): ExpenseIncomeModel[] {
+        const tax: ExpenseIncomeModel[] = data.earnings.map(earning => {
             const taxPayment = Utils.calculateTax(earning.amount);
             return {
                 name: earning.name,
@@ -12,7 +12,7 @@ export class Utils {
         return tax;
     }
 
-    static getNationalInsurance(data: DataModel): EarningModel[] {
+    static getNationalInsurance(data: DataModel): ExpenseIncomeModel[] {
         return data.earnings.map(earning => {
             const NiPayment = Utils.calculateNi(earning.amount);
             return {
@@ -33,18 +33,18 @@ export class Utils {
     }
 
     static getExpenses(data: DataModel) {
-        const totalMonthlyExpense = (data.expenses.monthly.reduce((prev: Expense, curr: Expense) => {
+        const totalMonthlyExpense = (data.expenses.monthly.reduce((prev: ExpenseIncomeModel, curr: ExpenseIncomeModel) => {
             return {
                 name: "total",
-                cost: prev.cost + curr.cost
+                amount: prev.amount + curr.amount
             }
-        })).cost
-        const totalWeeklyExpense = (data.expenses.weekly.reduce((prev: Expense, curr: Expense) => {
+        })).amount;
+        const totalWeeklyExpense = (data.expenses.weekly.reduce((prev: ExpenseIncomeModel, curr: ExpenseIncomeModel) => {
             return {
                 name: "total",
-                cost: prev.cost + curr.cost
+                amount: prev.amount + curr.amount
             }
-        })).cost
+        })).amount;
         return totalMonthlyExpense * 12 + totalWeeklyExpense * 52;
     }
 
