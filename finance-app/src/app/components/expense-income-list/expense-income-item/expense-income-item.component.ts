@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ExpenseIncomeModel } from '../../../interfaces/dataModel';
 import { ValueBase } from '../../../utils/valueBase';
 
@@ -8,6 +8,8 @@ import { ValueBase } from '../../../utils/valueBase';
   styleUrls: ['./expense-income-item.component.scss']
 })
 export class ExpenseIncomeItemComponent extends ValueBase<ExpenseIncomeModel> implements OnInit {
+  @Input()
+  readonly = false;
   constructor() {
     super()
    }
