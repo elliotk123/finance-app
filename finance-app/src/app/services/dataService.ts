@@ -11,4 +11,8 @@ export class DataService {
   async getData() {
     return this.http.get<DataModel>(this.baseUrl+'/data').toPromise();
   }
+
+  async saveData(data: DataModel) {
+    return this.http.put<DataModel>(this.baseUrl+'/data', data).toPromise();
+  }
 }

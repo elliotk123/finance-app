@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
   }
 
   async saveData() {
-    console.log("save", this.data);
+    this.data = await this.dataService.saveData(this.data);
   }
 }
 

@@ -18,3 +18,8 @@ exports.getDataController = (req, res) => {
         }
     });
 }
+
+exports.putDataController = (req, res) => {
+    console.log(req.body);
+    res.send(req.body);
+}
