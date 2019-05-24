@@ -16,4 +16,7 @@
 Monthly Expenses:
 <app-expense-income-list *ngIf = "data?.expenses.monthly" [(model)] = "data.expenses.monthly"></app-expense-income-list>
 Weekly Expenses:
-<app-expense-income-list *ngIf = "data?.expenses.weekly" [(model)] = "data.expenses.weekly" [readonly] = "true"><app-expense-income-list>
+<app-expense-income-list *ngIf = "data?.expenses.weekly" [(model)] = "data.expenses.weekly" [readonly] = "true"></app-expense-income-list>
+<button (click) = "saveData()">
+  Save
+</button>

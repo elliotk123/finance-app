@@ -22,6 +22,15 @@ export class Utils {
         })
     }
 
+    static getStudentLoanRepayments(data: DataModel): ExpenseIncomeModel[] {
+        return data.earnings.map(earning => {
+            const loanRepayment = Utils.calculateStudentLoan(earning.amount);
+            return {
+                name: earning.name,
+                amount: loanRepayment
+            }
+        })
+    }
     private static calculateTax(earning: number) {
         return 0.2*(earning - 12500);
     }
@@ -30,6 +39,10 @@ export class Utils {
         const weeklyEarning = earning/52; 
         const weeklyEarningAfterNi = (weeklyEarning - 166.01)*0.12;
         return weeklyEarningAfterNi * 52;
+    }
+
+    private static calculateStudentLoan(earning: number) {
+        return Math.max((earning - 25725)*0.09, 0);
     }
 
     static getExpenses(data: DataModel) {

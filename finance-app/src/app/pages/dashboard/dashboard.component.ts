@@ -23,11 +23,12 @@ export class DashboardComponent implements OnInit {
     this.data = await this.dataService.getData();
     const taxes = Utils.getTax(this.data);
     const NiPayments = Utils.getNationalInsurance(this.data);
+    const studentLoanPayments = Utils.getStudentLoanRepayments(this.data);
     const expenses = Utils.getExpenses(this.data)
     this.budgets = this.data.earnings.map((earning, index) => {
       return {
         name: earning.name,
-        amount: earning.amount - taxes[index].amount - NiPayments[index].amount
+        amount: earning.amount - taxes[index].amount - NiPayments[index].amount - studentLoanPayments[index].amount
       }
     })
     this.total = (this.budgets.reduce((prev: ExpenseIncomeModel, cur: ExpenseIncomeModel) => {
@@ -43,4 +44,9 @@ export class DashboardComponent implements OnInit {
     console.log(this.data);
   }
 
+  async saveData() {
+    console.log("save", this.data);
+  }
 }
+
+
