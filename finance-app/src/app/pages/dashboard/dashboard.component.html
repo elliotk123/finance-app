@@ -1,3 +1,5 @@
+Earnings:
+<app-expense-income-list *ngIf = "data?.earnings" [(model)] = "data.earnings"></app-expense-income-list>
 <div *ngFor = 'let budget of budgets'>
   {{budget.name}}: £{{budget.amount}}
 </div>
