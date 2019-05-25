@@ -1,2 +1,4 @@
 /node_modules
 rootkey.json
+/build
+js2exe.exe

@@ -4,7 +4,8 @@
   "description": "server for finance app",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js"
+    "start-local-server": "node app.js",
+    "build-server": "js2exe.exe \"app.js\" \"build/app.exe\""
   },
   "author": "Elliot Kerman",
   "license": "ISC",
