@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/dataService';
-import { DataModel, ExpenseIncomeModel } from '../../interfaces/dataModel';
+import { DataModel, ExpenseIncomeModel, DataModelResponse } from '../../interfaces/dataModel';
 import { Utils } from '../../utils/utils';
 
 @Component({
@@ -20,23 +20,29 @@ export class DashboardComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   async ngOnInit() {
-    this.data = await this.dataService.getData();
-    const taxes = Utils.getTax(this.data);
-    const NiPayments = Utils.getNationalInsurance(this.data);
-    const studentLoanPayments = Utils.getStudentLoanRepayments(this.data);
-    const expenses = Utils.getExpenses(this.data)
-    this.budgets = this.data.earnings.map((earning, index) => {
+    this.data = await this.getData();
+    const earnings = this.data.earnings;
+    const expenseModel = this.data.expenses;
+    const taxes = Utils.getTax(earnings);
+    const NiPayments = Utils.getNationalInsurance(earnings);
+    const studentLoanPayments = Utils.getStudentLoanRepayments(earnings);
+    const expenses = Utils.getExpenses(expenseModel)
+    this.budgets = earnings.map((earning, index) => {
       return {
         name: earning.name,
         amount: earning.amount - taxes[index].amount - NiPayments[index].amount - studentLoanPayments[index].amount
       }
     })
-    this.total = (this.budgets.reduce((prev: ExpenseIncomeModel, cur: ExpenseIncomeModel) => {
-      return {
-        name: "any",
-        amount: prev.amount + cur.amount
-      }
-    })).amount
+    if(this.budgets.length !== 0) {
+      this.total = (this.budgets.reduce((prev: ExpenseIncomeModel, cur: ExpenseIncomeModel) => {
+        return {
+          name: "any",
+          amount: prev.amount + cur.amount
+        }
+      })).amount
+    } else {
+      this.total = 0;
+    }
     this.totalAfterExpenses = this.total - expenses;
     this.monthlyTotal = this.totalAfterExpenses/12;
     this.weeklyTotal = this.totalAfterExpenses/52;
@@ -46,6 +52,28 @@ export class DashboardComponent implements OnInit {
 
   async saveData() {
     this.data = await this.dataService.saveData(this.data);
+  }
+
+  async getData(): Promise<DataModel> {
+    const data: DataModelResponse = await this.dataService.getData();
+    const returnValue: DataModel = {
+      earnings: [],
+      expenses: {
+        monthly: [],
+        weekly: []
+      },
+      taxBands: data.taxBands
+    }
+    if (data) {
+      returnValue.earnings = data.earnings || [];
+      if(data.expenses) {
+        returnValue.expenses = {
+          monthly: data.expenses.monthly || [],
+          weekly: data.expenses.weekly || []
+        }
+      }
+    }
+    return returnValue;
   }
 }
 

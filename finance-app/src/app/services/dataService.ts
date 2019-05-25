@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DataModel } from '../interfaces/dataModel';
+import { DataModel, DataModelResponse } from '../interfaces/dataModel';
 
 @Injectable()
 export class DataService {
@@ -9,7 +9,7 @@ export class DataService {
   baseUrl = 'http://localhost:3000';
 
   async getData() {
-    return this.http.get<DataModel>(this.baseUrl+'/data').toPromise();
+    return this.http.get<DataModelResponse>(this.baseUrl+'/data').toPromise();
   }
 
   async saveData(data: DataModel) {

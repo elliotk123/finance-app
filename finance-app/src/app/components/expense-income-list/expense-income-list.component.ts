@@ -18,4 +18,11 @@ export class ExpenseIncomeListComponent extends ValueBase<ExpenseIncomeModel[]> 
     super.ngOnInit();
   }
 
+  addItem() {
+    this.value.push({ 
+      name: "",
+      amount: 0
+    })
+  }
+
 }

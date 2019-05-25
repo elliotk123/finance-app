@@ -1,8 +1,8 @@
-import { DataModel, ExpenseIncomeModel } from '../interfaces/dataModel';
+import { DataModel, ExpenseIncomeModel, ExpenseModel } from '../interfaces/dataModel';
 
 export class Utils {
-    static getTax(data: DataModel): ExpenseIncomeModel[] {
-        const tax: ExpenseIncomeModel[] = data.earnings.map(earning => {
+    static getTax(earnings: ExpenseIncomeModel[]): ExpenseIncomeModel[] {
+        const tax: ExpenseIncomeModel[] = earnings.map(earning => {
             const taxPayment = Utils.calculateTax(earning.amount);
             return {
                 name: earning.name,
@@ -12,8 +12,8 @@ export class Utils {
         return tax;
     }
 
-    static getNationalInsurance(data: DataModel): ExpenseIncomeModel[] {
-        return data.earnings.map(earning => {
+    static getNationalInsurance(earnings: ExpenseIncomeModel[]): ExpenseIncomeModel[] {
+        return earnings.map(earning => {
             const NiPayment = Utils.calculateNi(earning.amount);
             return {
                 name: earning.name,
@@ -22,8 +22,8 @@ export class Utils {
         })
     }
 
-    static getStudentLoanRepayments(data: DataModel): ExpenseIncomeModel[] {
-        return data.earnings.map(earning => {
+    static getStudentLoanRepayments(earnings: ExpenseIncomeModel[]): ExpenseIncomeModel[] {
+        return earnings.map(earning => {
             const loanRepayment = Utils.calculateStudentLoan(earning.amount);
             return {
                 name: earning.name,
@@ -45,19 +45,29 @@ export class Utils {
         return Math.max((earning - 25725)*0.09, 0);
     }
 
-    static getExpenses(data: DataModel) {
-        const totalMonthlyExpense = (data.expenses.monthly.reduce((prev: ExpenseIncomeModel, curr: ExpenseIncomeModel) => {
-            return {
-                name: "total",
-                amount: prev.amount + curr.amount
-            }
-        })).amount;
-        const totalWeeklyExpense = (data.expenses.weekly.reduce((prev: ExpenseIncomeModel, curr: ExpenseIncomeModel) => {
-            return {
-                name: "total",
-                amount: prev.amount + curr.amount
-            }
-        })).amount;
+    static getExpenses(expenses: ExpenseModel) {
+        let totalMonthlyExpense: number;
+        if (expenses.monthly.length === 0) {
+            totalMonthlyExpense = 0
+        } else {
+            totalMonthlyExpense = (expenses.monthly.reduce((prev: ExpenseIncomeModel, curr: ExpenseIncomeModel) => {
+                return {
+                    name: "total",
+                    amount: prev.amount + curr.amount
+                }
+            })).amount;
+        }
+        let totalWeeklyExpense
+        if (expenses.weekly.length == 0) {
+            totalWeeklyExpense = 0;
+        } else {
+            totalWeeklyExpense = (expenses.weekly.reduce((prev: ExpenseIncomeModel, curr: ExpenseIncomeModel) => {
+                return {
+                    name: "total",
+                    amount: prev.amount + curr.amount
+                }
+            })).amount;
+        }
         return totalMonthlyExpense * 12 + totalWeeklyExpense * 52;
     }
 

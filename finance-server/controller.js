@@ -9,6 +9,7 @@ AWS.config.update({
 var s3 = new AWS.S3();
 
 exports.getDataController = (req, res) => {
+    console.log("Get Data Request");
     const params = {Bucket: 'www.connors-stag.com', Key: 'data.json'}
     s3.getObject(params, function(err, data) {
         if (err){
@@ -20,6 +21,13 @@ exports.getDataController = (req, res) => {
 }
 
 exports.putDataController = (req, res) => {
-    console.log(req.body);
-    res.send(req.body);
+    console.log("Put Data Request");
+    const params = {Bucket: 'www.connors-stag.com', Key: 'data.json', Body: JSON.stringify(req.body)}
+    s3.putObject(params, function(err, data) {
+        if (err) {
+            console.log(err, err.stack);
+        } else {
+            res.send(req.body);        // successful response
+        }
+    })
 }

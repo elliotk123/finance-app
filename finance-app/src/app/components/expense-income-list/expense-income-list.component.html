@@ -1,3 +1,4 @@
 <div class = "expense-income-list-container">
   <app-expense-income-item *ngFor = "let item of value" [(model)] = "item" [readonly] = "readonly"></app-expense-income-item>
+  <button (click) = "addItem()" >add</button>
 </div>

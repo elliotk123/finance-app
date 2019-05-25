@@ -13,9 +13,15 @@ export interface ExpenseModel {
     weekly: ExpenseIncomeModel[]
 }
 
+export interface DataModelResponse {
+    earnings?: ExpenseIncomeModel[],
+    taxBands?: TaxBandModel[],
+    expenses?: ExpenseModel
+}
+
 export interface DataModel {
     earnings: ExpenseIncomeModel[],
-    taxBands: TaxBandModel[],
+    taxBands?: TaxBandModel[],
     expenses: ExpenseModel
 }
 
