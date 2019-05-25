@@ -1,3 +1,3 @@
-start node finance-server/build/app.exe
+start node finance-server/app.js
 cd finance-app
-start run-app.bat
+start ng serve --open
