@@ -1,24 +1,18 @@
 Earnings:
 <app-expense-income-list *ngIf = "data?.earnings" [(model)] = "data.earnings"></app-expense-income-list>
-<div *ngFor = 'let budget of budgets'>
-  {{budget.name}}: £{{budget.amount}}
+<div>
+  Total after Expenses: £{{this.totalAfterExpenses | number: '1.2-2'}}
 </div>
 <div>
-  Subtotal after tax and Ni: £{{this.total}}
+  Monthly Budget: £{{this.totalAfterExpenses/12 | number: '1.2-2'}}
 </div>
 <div>
-  Total after Expenses: £{{this.totalAfterExpenses}}
-</div>
-<div>
-  Monthly Budget: £{{this.monthlyTotal}}
-</div>
-<div>
-  Weekly Budget: £{{this.weeklyTotal}}
+  Weekly Budget: £{{this.totalAfterExpenses/52 | number: '1.2-2'}}
 </div>
 Monthly Expenses:
 <app-expense-income-list *ngIf = "data?.expenses.monthly" [(model)] = "data.expenses.monthly"></app-expense-income-list>
 Weekly Expenses:
-<app-expense-income-list *ngIf = "data?.expenses.weekly" [(model)] = "data.expenses.weekly" [readonly] = "true"></app-expense-income-list>
+<app-expense-income-list *ngIf = "data?.expenses.weekly" [(model)] = "data.expenses.weekly"></app-expense-income-list>
 <button (click) = "saveData()">
   Save
 </button>

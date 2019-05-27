@@ -1,4 +1,7 @@
 <div class = "expense-income-list-container">
-  <app-expense-income-item *ngFor = "let item of value" [(model)] = "item" [readonly] = "readonly"></app-expense-income-item>
-  <button (click) = "addItem()" >add</button>
+  <div class = "item-container" *ngFor = "let item of value;let i = index">
+      <app-expense-income-item  [(model)] = "item" [readonly] = "readonly"></app-expense-income-item>
+      <button (click) = "removeItem(i)">remove</button>
+  </div>
+  <button class = "add-button" (click) = "addItem()" >add</button>
 </div>

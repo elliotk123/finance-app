@@ -25,4 +25,8 @@ export class ExpenseIncomeListComponent extends ValueBase<ExpenseIncomeModel[]> 
     })
   }
 
+  removeItem(index) {
+    this.value.splice(index);
+  }
+
 }

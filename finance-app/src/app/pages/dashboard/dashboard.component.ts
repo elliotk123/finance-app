@@ -10,70 +10,50 @@ import { Utils } from '../../utils/utils';
 })
 export class DashboardComponent implements OnInit {
 
-  budgets: ExpenseIncomeModel[];
   data: DataModel;
-  total: number;
-  totalAfterExpenses: number;
-  monthlyTotal: number;
-  weeklyTotal: number;
 
   constructor(private dataService: DataService) { }
 
   async ngOnInit() {
     this.data = await this.getData();
-    const earnings = this.data.earnings;
-    const expenseModel = this.data.expenses;
-    const taxes = Utils.getTax(earnings);
-    const NiPayments = Utils.getNationalInsurance(earnings);
-    const studentLoanPayments = Utils.getStudentLoanRepayments(earnings);
-    const expenses = Utils.getExpenses(expenseModel)
-    this.budgets = earnings.map((earning, index) => {
+    console.log(this.data);
+  }
+
+  get totalAfterExpenses() {
+    if(!this.data) {
+      return 0
+    }
+    const taxes = Utils.getTax(this.data.earnings);
+    const NiPayments = Utils.getNationalInsurance(this.data.earnings);
+    const studentLoanPayments = Utils.getStudentLoanRepayments(this.data.earnings);
+    const expenses = Utils.getExpenses(this.data.expenses)
+    const budgets = this.data.earnings.map((earning, index) => {
       return {
         name: earning.name,
         amount: earning.amount - taxes[index].amount - NiPayments[index].amount - studentLoanPayments[index].amount
       }
     })
-    if(this.budgets.length !== 0) {
-      this.total = (this.budgets.reduce((prev: ExpenseIncomeModel, cur: ExpenseIncomeModel) => {
+    let total: number;
+    if (budgets.length !== 0) {
+      total =  (budgets.reduce((prev: ExpenseIncomeModel, cur: ExpenseIncomeModel) => {
         return {
           name: "any",
           amount: prev.amount + cur.amount
         }
       })).amount
     } else {
-      this.total = 0;
+      total = 0;
     }
-    this.totalAfterExpenses = this.total - expenses;
-    this.monthlyTotal = this.totalAfterExpenses/12;
-    this.weeklyTotal = this.totalAfterExpenses/52;
-    
-    console.log(this.data);
+    return total - expenses;
+
   }
 
   async saveData() {
-    this.data = await this.dataService.saveData(this.data);
+    this.data = await this.dataService.saveData(this .data);
   }
 
   async getData(): Promise<DataModel> {
-    const data: DataModelResponse = await this.dataService.getData();
-    const returnValue: DataModel = {
-      earnings: [],
-      expenses: {
-        monthly: [],
-        weekly: []
-      },
-      taxBands: data.taxBands
-    }
-    if (data) {
-      returnValue.earnings = data.earnings || [];
-      if(data.expenses) {
-        returnValue.expenses = {
-          monthly: data.expenses.monthly || [],
-          weekly: data.expenses.weekly || []
-        }
-      }
-    }
-    return returnValue;
+    return this.dataService.getData();
   }
 
 }

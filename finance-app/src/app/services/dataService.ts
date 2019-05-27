@@ -8,11 +8,35 @@ export class DataService {
 
   baseUrl = 'http://localhost:3000';
 
-  async getData() {
-    return this.http.get<DataModelResponse>(this.baseUrl+'/data').toPromise();
+  async getData(): Promise<DataModel> {
+    const response = await this.http.get<DataModelResponse>(this.baseUrl+'/data').toPromise();
+    return this.mapDataModelResponse(response);
   }
 
-  async saveData(data: DataModel) {
-    return this.http.put<DataModel>(this.baseUrl+'/data', data).toPromise();
+  async saveData(data: DataModel): Promise<DataModel> {
+    const response = await this.http.put<DataModelResponse>(this.baseUrl+'/data', data).toPromise();
+    return this.mapDataModelResponse(response);
+  }
+
+  private mapDataModelResponse(response: DataModelResponse): DataModel {
+    const returnValue: DataModel = {
+      earnings: [],
+      expenses: {
+        monthly: [],
+        weekly: []
+      },
+      taxBands: []
+    }
+    if (response) {
+      returnValue.earnings = response.earnings || [];
+      returnValue.taxBands = response.taxBands;
+      if(response.expenses) {
+        returnValue.expenses = {
+          monthly: response.expenses.monthly || [],
+          weekly: response.expenses.weekly || []
+        }
+      }
+    }
+    return returnValue;
   }
 }

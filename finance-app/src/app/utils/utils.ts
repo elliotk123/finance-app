@@ -53,18 +53,18 @@ export class Utils {
             totalMonthlyExpense = (expenses.monthly.reduce((prev: ExpenseIncomeModel, curr: ExpenseIncomeModel) => {
                 return {
                     name: "total",
-                    amount: prev.amount + curr.amount
+                    amount: Number(prev.amount) + Number(curr.amount)
                 }
             })).amount;
         }
-        let totalWeeklyExpense
-        if (expenses.weekly.length == 0) {
+        let totalWeeklyExpense: number;
+        if (expenses.weekly.length === 0) {
             totalWeeklyExpense = 0;
         } else {
             totalWeeklyExpense = (expenses.weekly.reduce((prev: ExpenseIncomeModel, curr: ExpenseIncomeModel) => {
                 return {
                     name: "total",
-                    amount: prev.amount + curr.amount
+                    amount: Number(prev.amount) + Number(curr.amount)
                 }
             })).amount;
         }

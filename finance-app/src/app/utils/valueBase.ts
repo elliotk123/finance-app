@@ -12,7 +12,6 @@ export class ValueBase<T> {
   modelChange = new EventEmitter<T>();
 
   set model(value: T) {
-    console.log("change", value);
     this.value = value;
     this.modelChange.emit(value);
   }
