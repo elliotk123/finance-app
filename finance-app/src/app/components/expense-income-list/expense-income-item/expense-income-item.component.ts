@@ -10,6 +10,9 @@ import { ValueBase } from '../../../utils/valueBase';
 export class ExpenseIncomeItemComponent extends ValueBase<ExpenseIncomeModel> implements OnInit {
   @Input()
   readonly = false;
+  @Input()
+  highlight = false;
+
   constructor() {
     super()
    }

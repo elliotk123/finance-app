@@ -22,6 +22,7 @@ export class DataService {
     const returnValue: DataModel = {
       earnings: [],
       expenses: {
+        yearly: [],
         monthly: [],
         weekly: []
       },
@@ -32,6 +33,7 @@ export class DataService {
       returnValue.taxBands = response.taxBands;
       if(response.expenses) {
         returnValue.expenses = {
+          yearly: response.expenses.yearly || [],
           monthly: response.expenses.monthly || [],
           weekly: response.expenses.weekly || []
         }

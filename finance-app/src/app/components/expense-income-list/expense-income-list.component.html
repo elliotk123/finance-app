@@ -3,5 +3,8 @@
       <app-expense-income-item  [(model)] = "item" [readonly] = "readonly"></app-expense-income-item>
       <button (click) = "removeItem(i)">remove</button>
   </div>
+  <div class = "item-container">
+    <app-expense-income-item *ngIf = "showTotal" [(model)] = "total" [readonly] = "true" [highlight] = "true"></app-expense-income-item>
+  </div>
   <button class = "add-button" (click) = "addItem()" >add</button>
 </div>

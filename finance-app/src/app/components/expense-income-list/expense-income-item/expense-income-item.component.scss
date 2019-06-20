@@ -1,5 +1,8 @@
-.expense-income-item {
+.expense-income-item-container {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    &.highlight {
+        border-style: solid;
+        border-width: 1px;
+    }
 }

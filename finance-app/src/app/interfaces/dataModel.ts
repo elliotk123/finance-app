@@ -9,6 +9,7 @@ export interface TaxBandModel {
 }
 
 export interface ExpenseModel {
+    yearly: ExpenseIncomeModel[],
     monthly: ExpenseIncomeModel[],
     weekly: ExpenseIncomeModel[]
 }

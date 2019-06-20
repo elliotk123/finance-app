@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ExpenseIncomeModel } from '../../interfaces/dataModel';
 import { ValueBase } from '../../utils/valueBase';
+import { Utils } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-expense-income-list',
@@ -10,6 +11,9 @@ import { ValueBase } from '../../utils/valueBase';
 export class ExpenseIncomeListComponent extends ValueBase<ExpenseIncomeModel[]> implements OnInit {
   @Input()
   readonly = false;
+  @Input()
+  showTotal = true;
+
   constructor() { 
     super()
   }
@@ -26,7 +30,11 @@ export class ExpenseIncomeListComponent extends ValueBase<ExpenseIncomeModel[]> 
   }
 
   removeItem(index) {
-    this.value.splice(index);
+    this.value.splice(index, 1);
+  }
+
+  get total() {
+    return Utils.getTotalExpense(this.value);
   }
 
 }

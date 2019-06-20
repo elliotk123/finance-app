@@ -1,4 +1,4 @@
-<div class = "expense-income-item-container">
+<div class = "expense-income-item-container" [ngClass] = "{'highlight': highlight}">
   <input [(ngModel)] = "value.name" [readonly] = "readonly">
   <input [(ngModel)] = "value.amount" [readonly] = "readonly">
 </div>

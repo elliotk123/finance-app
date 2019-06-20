@@ -9,6 +9,8 @@ Earnings:
 <div>
   Weekly Budget: £{{this.totalAfterExpenses/52 | number: '1.2-2'}}
 </div>
+Yearly Expenses: 
+<app-expense-income-list *ngIf = "data?.expenses.yearly" [(model)] = "data.expenses.yearly"></app-expense-income-list>
 Monthly Expenses:
 <app-expense-income-list *ngIf = "data?.expenses.monthly" [(model)] = "data.expenses.monthly"></app-expense-income-list>
 Weekly Expenses:

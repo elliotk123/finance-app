@@ -46,29 +46,31 @@ export class Utils {
     }
 
     static getExpenses(expenses: ExpenseModel) {
-        let totalMonthlyExpense: number;
-        if (expenses.monthly.length === 0) {
-            totalMonthlyExpense = 0
-        } else {
-            totalMonthlyExpense = (expenses.monthly.reduce((prev: ExpenseIncomeModel, curr: ExpenseIncomeModel) => {
-                return {
-                    name: "total",
-                    amount: Number(prev.amount) + Number(curr.amount)
-                }
-            })).amount;
+        const totalYearlyExpense = Utils.getTotalExpense(expenses.yearly).amount;
+        const totalMonthlyExpense = Utils.getTotalExpense(expenses.monthly).amount;
+        const totalWeeklyExpense = Utils.getTotalExpense(expenses.weekly).amount;
+        return totalYearlyExpense + totalMonthlyExpense * 12 + totalWeeklyExpense * 52;
+    }
+
+    static getTotalExpense(expenses: ExpenseIncomeModel[]) {
+        if (expenses.length == 0) {
+            return {
+                name: "total",
+                amount: 0
+            }
         }
-        let totalWeeklyExpense: number;
-        if (expenses.weekly.length === 0) {
-            totalWeeklyExpense = 0;
-        } else {
-            totalWeeklyExpense = (expenses.weekly.reduce((prev: ExpenseIncomeModel, curr: ExpenseIncomeModel) => {
-                return {
-                    name: "total",
-                    amount: Number(prev.amount) + Number(curr.amount)
-                }
-            })).amount;
+        if (expenses.length == 1) {
+            return {
+                name: "total",
+                amount: expenses[0].amount
+            }
         }
-        return totalMonthlyExpense * 12 + totalWeeklyExpense * 52;
+        return expenses.reduce((prev: ExpenseIncomeModel, cur: ExpenseIncomeModel) => {
+            return {
+              name: "total",
+              amount: Number(prev.amount) + Number(cur.amount)
+            }
+        })
     }
 
 }
