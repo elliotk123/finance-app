@@ -1,0 +1,21 @@
+
+
+.item-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.heading {
+    display: flex;
+    width: 100%;
+    font-weight: bold;
+    justify-content: center;
+}
+
+.value {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
