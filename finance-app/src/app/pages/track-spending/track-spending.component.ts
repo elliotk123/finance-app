@@ -10,11 +10,11 @@ export class TrackSpendingComponent implements OnInit {
   test: SummaryBarModel = {
     items: [
       {
-        heading: "Test 1",
+        heading: "Overspent",
         value: 1
       },
       {
-        heading: "Test 2",
+        heading: "Average Weekly Overspend",
         value: 2
       }
     ]
